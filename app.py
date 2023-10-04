@@ -8,27 +8,42 @@ driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
 
 sleep(10)
+
 arrecadacao_orcamentaria_geral = driver.find_element(By.XPATH, '//li[@id="LnkMenuReceitas"]/ul/li[@id="lnkReceitaOrcamentaria"]/a[@href="#"]')
 
-# Usar o JavaScript quando o elemento estiver coberto por outro elemento
+# Usar o JavaScript para clicar, quando o elemento estiver coberto por outro elemento
 driver.execute_script("arguments[0].click()", arrecadacao_orcamentaria_geral)
 
-sleep(15)
-# print(li_receitas)
+sleep(5)
+
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+sleep(5)
+
 # Acessar o Iframe:
-# driver.switch_to.frame('frmPaginaAspx')
+driver.switch_to.frame('frmPaginaAspx')
 
+# Ir para a proxima pagina da tabela
+clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
 
+sleep(5)
 
+irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]')
 
-# irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]')
+irr_texto = irrf.text
 
-# irr_texto = irrf.text
+print(irr_texto)
 
 
 
 # Voltar para o contexto padrão
-# driver.switch_to.default_content()
+driver.switch_to.default_content()
+
+
+
+
+
+
 
 
 # driver.quit()
