@@ -16,10 +16,6 @@ driver.execute_script("arguments[0].click()", arrecadacao_orcamentaria_geral)
 
 sleep(5)
 
-# driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-sleep(5)
-
 # Acessar o Iframe:
 driver.switch_to.frame('frmPaginaAspx')
 
@@ -28,14 +24,9 @@ clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl
 
 sleep(5)
 
+valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
 
-irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]')
-
-irr_texto = irrf.text
-
-print(irr_texto)
-
-
+print(valor_irrf)
 
 # Voltar para o contexto padrão
 driver.switch_to.default_content()
