@@ -16,7 +16,7 @@ driver.execute_script("arguments[0].click()", arrecadacao_orcamentaria_geral)
 
 sleep(5)
 
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+# driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
 sleep(5)
 
@@ -28,7 +28,8 @@ clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl
 
 sleep(5)
 
-irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]')
+
+irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]')
 
 irr_texto = irrf.text
 
