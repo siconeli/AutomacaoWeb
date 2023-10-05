@@ -63,14 +63,29 @@ while mes_final != mes_anterior_tratado:
     mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
     mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
 
-sleep(5)
+sleep(2)
 
 localiza_dia_31 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
 for td in localiza_dia_31:
-    if td.text == '30':
+    if '31' in td.text:
         td.click()
+        print('Não tinha o 31')
+        break
+    elif '30' in td.text:
+        td.click()
+        print('Não tinha o 30')
+        break
+    elif '29' in td.text:
+        td.click()
+        print('Não tinha o 29')
+        break
+    elif '28' in td.text:
+        td.click()
+        print('Tinha o 28')
+        break
 
+sleep(30)
 
 
 
