@@ -8,7 +8,7 @@ import datetime
 driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
 
-meses = {"01": "janeiro", "02": "fevereiro"}
+meses = {"1": "janeiro", "2": "fevereiro", "3": "março", "4": "abril", "5": "maio", "6": "junho", "7": "julho", "8": "agosto", "9": "setembro", "10": "outubro", "11": "novembro", "12": "dezembro"}
 
 sleep(5)
 
@@ -50,16 +50,22 @@ sleep(5)
 
 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
 
+# Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
 data_atual = datetime.datetime.now()
-
 ano_atual = data_atual.year
-mes_atual = data_atual.month
+mes_anterior = str(data_atual.month - 1)
+mes_anterior_extenso = meses.get(mes_anterior)
+mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
-# while mes_final != 'setembro de 2023':
-#     proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
-#     mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
 
-# print(mes_final)
+while mes_final != mes_anterior_tratado:
+    # proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
+    mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
+    mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
+
+
+
+sleep(20)
 # localiza_ultimo_dia = driver.find_element(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
 
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
