@@ -35,9 +35,9 @@ while mes_inicial != 'janeiro de 2023':
     proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
     mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
 
-localiza_dia_primeiro = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
+localiza_dia_1 = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
 
-for td in localiza_dia_primeiro:
+for td in localiza_dia_1:
     if td.text == '1':
         td.click()
 
@@ -57,16 +57,25 @@ mes_anterior = str(data_atual.month - 1)
 mes_anterior_extenso = meses.get(mes_anterior)
 mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
-
 while mes_final != mes_anterior_tratado:
     # proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
     mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
     mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
 
+sleep(5)
 
+localiza_dia_31 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
+for td in localiza_dia_31:
+    if td.text == '30':
+        td.click()
+        print('CLICADAO')
+
+print('pica')
 sleep(20)
-# localiza_ultimo_dia = driver.find_element(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
+
+
+
 
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
 
