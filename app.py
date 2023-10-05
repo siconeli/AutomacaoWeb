@@ -3,9 +3,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from time import sleep
+import datetime
 
 driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
+
+meses = {"01": "janeiro", "02": "fevereiro"}
 
 sleep(5)
 
@@ -28,7 +31,7 @@ sleep(2)
 
 mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
 
-while mes_inicial != 'setembro de 2023':
+while mes_inicial != 'janeiro de 2023':
     proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
     mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
 
@@ -46,18 +49,20 @@ abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-
 sleep(5)
 
 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
-while mes_final != 'setembro de 2023':
-    proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
-    mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
 
-print(mes_final)
+data_atual = datetime.datetime.now()
+
+ano_atual = data_atual.year
+mes_atual = data_atual.month
+
+# while mes_final != 'setembro de 2023':
+#     proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
+#     mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
+
+# print(mes_final)
 # localiza_ultimo_dia = driver.find_element(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
 
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
-
-sleep(20)
-
-
 
 # Ir para a proxima pagina da tabela
 # clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
