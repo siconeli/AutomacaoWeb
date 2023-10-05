@@ -19,19 +19,20 @@ sleep(5)
 # Acessar o Iframe:
 driver.switch_to.frame('frmPaginaAspx')
 
-sleep(5)
+sleep(1)
 
 abri_calendario = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-sleep(2)
+
+sleep(1)
+
+mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
+print(mes)
+
+sleep(5)
 
 proximo_mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
 
-# data_desejada = '01/09/2023'
-
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
-# # data_inicial.send_keys(data_desejada)
-
-# driver.execute_script(f"arguments[0].setAttribute('value', '{data_desejada}')", data_inicial)
 
 sleep(20)
 
@@ -48,9 +49,5 @@ sleep(20)
 # driver.switch_to.default_content()
 
 # sleep(20)
-
-
-
-
 
 # driver.quit()
