@@ -65,25 +65,35 @@ while mes_final != mes_anterior_tratado:
 
 sleep(2)
 
-localiza_dia_31 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
-for td in localiza_dia_31:
-    if '31' in td.text:
-        td.click()
-        print('Não tinha o 31')
-        break
-    elif '30' in td.text:
-        td.click()
-        print('Não tinha o 30')
-        break
-    elif '29' in td.text:
-        td.click()
-        print('Não tinha o 29')
-        break
-    elif '28' in td.text:
-        td.click()
-        print('Tinha o 28')
-        break
+# SOLUÇÃO: Pegar todos os dias de localiza_ultimo_dia e inserir em uma lista, ordenar ela e fazer um for para ver se tem o dia.
+
+# encontrou_31 = False
+
+# for td in localiza_ultimo_dia:
+#     if td.text == '31':
+#         td.click()
+#         encontrou_31 = True
+#         break
+
+# if not encontrou_31:
+#     for td in localiza_ultimo_dia:
+#         if td.text == '30':
+#             td.click()
+#             break
+#         else:
+#             for td in localiza_ultimo_dia:
+#                 if td.text == '29':
+#                     td.click()
+#                     break
+#                 else:
+#                     for td in localiza_ultimo_dia:
+#                         if td.text == '28':
+#                             td.click()
+#                             break
+
+
 
 sleep(30)
 
