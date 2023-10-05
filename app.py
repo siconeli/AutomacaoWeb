@@ -21,16 +21,26 @@ driver.switch_to.frame('frmPaginaAspx')
 
 sleep(1)
 
+# Selecionar data inicial no calendário:
 abri_calendario = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
 
-sleep(1)
-
 mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
-print(mes)
+
+while mes != 'setembro de 2023':
+    proximo_mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+    mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
+
+localiza_dia_primeiro = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
+
+for td in localiza_dia_primeiro:
+    if td.text == '1':
+        td.click()
 
 sleep(5)
 
-proximo_mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+# Selecionar data final no calendário:
+
+
 
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
 
