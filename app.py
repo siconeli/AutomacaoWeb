@@ -40,6 +40,7 @@ localiza_dia_1 = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD
 for td in localiza_dia_1:
     if td.text == '1':
         td.click()
+# Fim
 
 sleep(5)
 
@@ -69,15 +70,11 @@ localiza_dia_31 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_
 for td in localiza_dia_31:
     if td.text == '30':
         td.click()
-        print('CLICADAO')
-
-print('pica')
-sleep(20)
 
 
 
 
-# data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
+# Fim
 
 # Ir para a proxima pagina da tabela
 # clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
