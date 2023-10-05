@@ -21,23 +21,33 @@ driver.switch_to.frame('frmPaginaAspx')
 
 sleep(5)
 
-data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]').send_keys('01/09/2023')
+abri_calendario = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+sleep(2)
 
-sleep(5)
+proximo_mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
 
-# Ir para a proxima pagina da tabela
-clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+# data_desejada = '01/09/2023'
 
-sleep(5)
+# data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
+# # data_inicial.send_keys(data_desejada)
 
-valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
-
-print(valor_irrf)
-
-# Voltar para o contexto padrão
-driver.switch_to.default_content()
+# driver.execute_script(f"arguments[0].setAttribute('value', '{data_desejada}')", data_inicial)
 
 sleep(20)
+
+# Ir para a proxima pagina da tabela
+# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+
+# sleep(5)
+
+# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
+
+# print(valor_irrf)
+
+# # Voltar para o contexto padrão
+# driver.switch_to.default_content()
+
+# sleep(20)
 
 
 
