@@ -22,13 +22,15 @@ driver.switch_to.frame('frmPaginaAspx')
 sleep(1)
 
 # Selecionar data inicial no calendário:
-abri_calendario = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
 
-mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
+sleep(2)
 
-while mes != 'setembro de 2023':
-    proximo_mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-    mes = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
+mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
+
+while mes_inicial != 'setembro de 2023':
+    proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+    mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
 
 localiza_dia_primeiro = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
 
@@ -39,12 +41,23 @@ for td in localiza_dia_primeiro:
 sleep(5)
 
 # Selecionar data final no calendário:
+abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
 
+sleep(5)
 
+mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
+while mes_final != 'setembro de 2023':
+    proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
+    mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
+
+print(mes_final)
+# localiza_ultimo_dia = driver.find_element(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
 
 # data_inicial = driver.find_element(By.XPATH, '//input[@id="datDataInicial_I"]')
 
 sleep(20)
+
+
 
 # Ir para a proxima pagina da tabela
 # clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
