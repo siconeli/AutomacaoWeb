@@ -41,7 +41,7 @@ for mes in meses_calendario:
         for dia in localiza_dia_1:
             if dia.text == '1':
                 dia.click()
-                print(f'Selecionei o mes inicial! {mes}')
+                print(f'Selecionei o mes inicial: {mes}')
                 sleep(5)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
@@ -53,7 +53,21 @@ for mes in meses_calendario:
         while mes_final != mes:
             mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
-        print(f'Selecionei o mes final igual ao mês inicial {mes}')
+        print(f'Selecionei o mes final igual ao mês inicial: {mes}')
+
+        localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+
+        ultimos_dias = []
+
+        for dia in localiza_ultimo_dia:
+            dia_texto = dia.text
+            dia_inteiro = int(dia_texto)
+            ultimos_dias.append(dia_inteiro)
+        
+        print(ultimos_dias)
+
+        sleep(100)
+
 
 
     # elif mes != mes_inicial:
