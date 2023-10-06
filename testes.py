@@ -21,24 +21,25 @@ arrecadacao_orcamentaria_geral = driver.find_element(By.XPATH, '//li[@id="LnkMen
 
 # Usar o JavaScript para clicar, quando o elemento estiver coberto por outro elemento
 driver.execute_script("arguments[0].click()", arrecadacao_orcamentaria_geral)
-print('Cliquei no menu "Arrecadação Orçamentaria - Geral"')
+print('-> Abrindo "Arrecadação Orçamentaria - Geral"')
 
 sleep(5)
 
 # Acessar o Iframe:
 driver.switch_to.frame('frmPaginaAspx')
-print('Acessei o Iframe')
 print('\n')
 
 sleep(1)
 
 # Selecionar data inicial no calendário:
 abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-print('Abri o calendário Data Inicial')
+print('-> Abrindo calendário data inicial:')
 
 sleep(2)
 
 mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
+
+print(f'-> Início do mês {mes_inicial}')
 
 for mes in meses_calendario:
     # Se o mês for igual a janeiro:
@@ -47,11 +48,11 @@ for mes in meses_calendario:
         for dia in localiza_dia_1:
             if dia.text == '1':
                 dia.click()
-                print(f'Selecionei o dia e mês inicial: 01 de {mes}')
+                print(f'-> Dia e mês inicial selecionado: 01 de {mes}')
                 sleep(5)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
-        print('Abri o calendário Data Final')
+        print('-> Abrindo calendário data Final')
 
         mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
         
@@ -60,7 +61,7 @@ for mes in meses_calendario:
         while mes_final != mes:
             mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
-        print(f'Igualei o mês final com o mês inicial: {mes}')
+        print(f'-> Igualando o mês final com o mês inicial')
 
         localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
@@ -76,18 +77,18 @@ for mes in meses_calendario:
         for dia in localiza_ultimo_dia:
             if dia.text == ultimo_dia:
                 dia.click()   
-                print(f'Selecionei o último dia do mês do calendário de Data Final: Dia {ultimo_dia}')
+                print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
         
         # Inserir o código para pegar os dados da tabela e inserir no excel...
 
-        print(f'Fim do mês: {mes}')
+        print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(5)
     
-        print('Próximo mês!')
+        print('-> Próximo mês!')
         print('\n')
         abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-        print('Abri o calendário Data Inicial')
+        print('-> Abrindo calendário data inicial:')
         sleep(5)
 
     # Se o mês for diferente de janeiro: 
@@ -101,11 +102,11 @@ for mes in meses_calendario:
             for dia in localiza_dia_1:
                 if dia.text == '1':
                     dia.click()
-                    print(f'Selecionei o dia e mês inicial: 01 de {mes}')
+                    print(f'-> Dia e mês inicial selecionado: 01 de {mes}')
                     sleep(5)
 
             abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
-            print('Abri o calendário Data Final')
+            print('-> Abrindo calendário data final')
 
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
         
@@ -114,7 +115,7 @@ for mes in meses_calendario:
             while mes_final != mes_inicial:
                 proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
                 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
-                print(f'Igualei o mês final com o mês inicial: {mes}')
+                print(f'-> Igualando o mês final com o mês inicial')
 
             localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
@@ -130,14 +131,14 @@ for mes in meses_calendario:
             for dia in localiza_ultimo_dia:
                 if dia.text == ultimo_dia:
                     dia.click()   
-                    print(f'Selecionei o último dia do mês do calendário de Data Final: Dia {ultimo_dia}')
+                    print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
 
-        print(f'Fim do mês: {mes}')
+        print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(5)
 
         abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-        print('Abri o calendário Data Inicial')
+        print('-> Abrindo calendário data')
         sleep(5)
 
         # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
