@@ -8,7 +8,7 @@ import datetime
 
 driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
-print('Finalizei o carregamento do site')
+print('Realizei o carregamento do site')
 
 meses_conversao = {"1": "janeiro", "2": "fevereiro", "3": "março", "4": "abril", "5": "maio", "6": "junho", "7": "julho", "8": "agosto", "9": "setembro", "10": "outubro", "11": "novembro", "12": "dezembro"}
 
@@ -21,7 +21,7 @@ arrecadacao_orcamentaria_geral = driver.find_element(By.XPATH, '//li[@id="LnkMen
 
 # Usar o JavaScript para clicar, quando o elemento estiver coberto por outro elemento
 driver.execute_script("arguments[0].click()", arrecadacao_orcamentaria_geral)
-print('Cliquei no menu "Arrecadação Orçamentaria - Geral ')
+print('Cliquei no menu "Arrecadação Orçamentaria - Geral"')
 
 sleep(5)
 
@@ -45,7 +45,7 @@ for mes in meses_calendario:
         for dia in localiza_dia_1:
             if dia.text == '1':
                 dia.click()
-                print(f'Selecionei o mes inicial: 01 de {mes}')
+                print(f'Selecionei o dia e mês inicial: 01 de {mes}')
                 sleep(5)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
@@ -74,16 +74,22 @@ for mes in meses_calendario:
         for dia in localiza_ultimo_dia:
             if dia.text == ultimo_dia:
                 dia.click()   
-        print(f'Selecionei o último dia do mês do calendário de Data Final: Dia {dia}')
+                print(f'Selecionei o último dia do mês do calendário de Data Final: Dia {ultimo_dia}')
         
-        sleep(100)
+        print(f'Fim do mês: {mes}')
+        print('\n')
+        sleep(5)
 
+    abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+    print('Abri o calendário Data Inicial')
 
-    # elif mes != mes_inicial:
-    #         print('entrou no segundo if')
-    #         sleep(5)
-    #         proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-    #         print(f'segundo mes {mes}')
+    mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
+
+    if mes != mes_inicial:
+            print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
+            sleep(5)
+            proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+            print(f'segundo mes {mes}')
 
 
 sleep(50)
