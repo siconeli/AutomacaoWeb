@@ -76,20 +76,30 @@ for mes in meses_calendario:
                 dia.click()   
                 print(f'Selecionei o último dia do mês do calendário de Data Final: Dia {ultimo_dia}')
         
+        # Inserir o código para pegar os dados da tabela e inserir no excel...
+
         print(f'Fim do mês: {mes}')
         print('\n')
         sleep(5)
+        break
+    
 
+    print('Próximo mês!')
     abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
     print('Abri o calendário Data Inicial')
 
-    mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
-
     if mes != mes_inicial:
-            print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
-            sleep(5)
-            proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-            print(f'segundo mes {mes}')
+        print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
+
+        sleep(150)
+
+    # mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
+
+    # if mes != mes_inicial:
+    #         print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
+    #         sleep(150)
+    #         proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+    #         print(f'segundo mes {mes}')
 
 
 sleep(50)
