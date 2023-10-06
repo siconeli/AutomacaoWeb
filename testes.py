@@ -28,6 +28,7 @@ sleep(5)
 # Acessar o Iframe:
 driver.switch_to.frame('frmPaginaAspx')
 print('Acessei o Iframe')
+print('\n')
 
 sleep(1)
 
@@ -81,56 +82,26 @@ for mes in meses_calendario:
         print(f'Fim do mês: {mes}')
         print('\n')
         sleep(5)
-        break
     
-
-    print('Próximo mês!')
-    abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-    print('Abri o calendário Data Inicial')
+        print('Próximo mês!')
+        abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+        print('Abri o calendário Data Inicial')
+        sleep(2)
 
     if mes != mes_inicial:
         print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
+        while mes_inicial != mes:
+            proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+            mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
+
 
         sleep(150)
 
-    # mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
-
-    # if mes != mes_inicial:
-    #         print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
-    #         sleep(150)
-    #         proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-    #         print(f'segundo mes {mes}')
-
-
-sleep(50)
-
-# while mes_inicial != 'janeiro de 2023':
-#     proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-#     mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text
-
-# localiza_dia_1 = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
-
-# for td in localiza_dia_1:
-#     if td.text == '1':
-#         td.click()
+ 
 
 
 
 
 
 
-
-
-
-# data_atual = datetime.datetime.now()
-# mes = data_atual.month
-
-# cont = 0
-
-# for mes in range(1, mes):
-#     print(f'mes: {mes}')
-#     cont += 1
-
-# for mes in meses:
-#     print(mes)
 
