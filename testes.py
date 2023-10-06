@@ -126,22 +126,26 @@ for mes in meses_calendario:
             lista_dias_linha_6 = []
 
             for dia in localiza_ultimo_dia_linha_4:
-                dia_texto = dia.text
-                dia_inteiro = int(dia_texto)
                 if dia:
+                    dia_texto = dia.text
+                    dia_inteiro = int(dia_texto)
                     lista_dias_linha_4.append(dia_inteiro)
 
             for dia in localiza_ultimo_dia_linha_5:
-                dia_texto = dia.text
-                dia_inteiro = int(dia_texto)
                 if dia:
+                    dia_texto = dia.text
+                    dia_inteiro = int(dia_texto)
                     lista_dias_linha_5.append(dia_inteiro)
 
             for dia in localiza_ultimo_dia_linha_6:
-                dia_texto = dia.text
-                dia_inteiro = int(dia_texto)
                 if dia:
+                    dia_texto = dia.text
+                    dia_inteiro = int(dia_texto)
                     lista_dias_linha_6.append(dia_inteiro)
+
+            print(lista_dias_linha_4)
+            print(lista_dias_linha_5)
+            print(lista_dias_linha_6)
             
             if len(lista_dias_linha_4) > 0: 
                 maior_linha_4 = max(lista_dias_linha_4)
@@ -153,7 +157,6 @@ for mes in meses_calendario:
                 maior_linha_6 = max(lista_dias_linha_6)
 
             maiores = []
-            print(maiores)
 
             if maior_linha_4:
                 maiores.append(maior_linha_4)
@@ -163,6 +166,8 @@ for mes in meses_calendario:
             
             if maior_linha_6:
                 maiores.append(maior_linha_6)
+ 
+            print(maiores)
 
             ultimo_dia = str(max(maiores))
             
