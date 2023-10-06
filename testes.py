@@ -94,8 +94,8 @@ for mes in meses_calendario:
             proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
             mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
 
-
-        sleep(150)
+        print(mes)
+        sleep(5)
 
  
 
