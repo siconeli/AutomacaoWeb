@@ -139,6 +139,8 @@ for mes in meses_calendario:
             sleep(10)
 
 
+#  FAZER A MESMA COISA COM O CÓDIGO A BAIXO!
+
             # localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
             # localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
             # if localiza_ultimo_dia_linha_6:
