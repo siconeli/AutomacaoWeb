@@ -117,19 +117,36 @@ for mes in meses_calendario:
                 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
                 print(f'-> Igualando o mês final com o mês inicial')
 
+            maiores = []
+
             localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td[@class="dxeCalendarDay_DevEx"]')
+
+            if localiza_ultimo_dia_linha_4:
+                lista_dias_linha_4 = []
+
+                for dia in localiza_ultimo_dia_linha_4:
+                    if dia:
+                        dia_texto = dia.text
+                        dia_inteiro = int(dia_texto)
+                        lista_dias_linha_4.append(dia_inteiro)
+
+                if len(lista_dias_linha_4) > 0: 
+                    maior_linha_4 = max(lista_dias_linha_4)
+
+                if maior_linha_4:
+                    maiores.append(maior_linha_4)
+            sleep(10)
+
+
             localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
             localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
+            if localiza_ultimo_dia_linha_6:
+                
+                
 
-            lista_dias_linha_4 = []
             lista_dias_linha_5 = []
             lista_dias_linha_6 = []
 
-            for dia in localiza_ultimo_dia_linha_4:
-                if dia:
-                    dia_texto = dia.text
-                    dia_inteiro = int(dia_texto)
-                    lista_dias_linha_4.append(dia_inteiro)
 
             for dia in localiza_ultimo_dia_linha_5:
                 if dia:
@@ -145,12 +162,6 @@ for mes in meses_calendario:
                 else:
                     lista_dias_linha_6.append(0)
 
-            print(lista_dias_linha_4)
-            print(lista_dias_linha_5)
-            print(lista_dias_linha_6)
-            
-            if len(lista_dias_linha_4) > 0: 
-                maior_linha_4 = max(lista_dias_linha_4)
             
             if len(lista_dias_linha_5) > 0: 
                 maior_linha_5 = max(lista_dias_linha_5)
@@ -158,18 +169,13 @@ for mes in meses_calendario:
             if len(lista_dias_linha_6) >= 0: 
                 maior_linha_6 = max(lista_dias_linha_6)
 
-            maiores = []
-
-            if maior_linha_4:
-                maiores.append(maior_linha_4)
 
             if maior_linha_5:
                 maiores.append(maior_linha_5)
             
             if maior_linha_6:
                 maiores.append(maior_linha_6)
- 
-            print(maiores)
+                
 
             ultimo_dia = str(max(maiores))
             
