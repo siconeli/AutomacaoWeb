@@ -140,8 +140,6 @@ for mes in meses_calendario:
         print('Abri o calendário Data Inicial')
         sleep(5)
 
-            
-
         # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
         data_atual = datetime.datetime.now()
         ano_atual = data_atual.year
