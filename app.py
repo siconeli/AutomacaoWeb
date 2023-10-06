@@ -24,6 +24,12 @@ driver.switch_to.frame('frmPaginaAspx')
 
 sleep(1)
 
+cont = 0
+
+for mes in range(1, 12+1):
+    print(f'mes: {mes}')
+    cont += 1
+
 # Selecionar data inicial no calendário:
 abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
 
