@@ -142,6 +142,8 @@ for mes in meses_calendario:
                     dia_texto = dia.text
                     dia_inteiro = int(dia_texto)
                     lista_dias_linha_6.append(dia_inteiro)
+                else:
+                    lista_dias_linha_6.append(0)
 
             print(lista_dias_linha_4)
             print(lista_dias_linha_5)
@@ -153,7 +155,7 @@ for mes in meses_calendario:
             if len(lista_dias_linha_5) > 0: 
                 maior_linha_5 = max(lista_dias_linha_5)
 
-            if len(lista_dias_linha_6) > 0: 
+            if len(lista_dias_linha_6) >= 0: 
                 maior_linha_6 = max(lista_dias_linha_6)
 
             maiores = []
