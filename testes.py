@@ -88,14 +88,10 @@ for mes in meses_calendario:
         print('\n')
         abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
         print('Abri o calendário Data Inicial')
-        sleep(2)
+        sleep(5)
 
     # Se o mês for diferente de janeiro: 
     if mes != mes_inicial:
-        abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-        print('Abri o calendário Data Inicial')
-        sleep(2)
-        
         while mes_inicial != mes:
             proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
             mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
@@ -140,6 +136,9 @@ for mes in meses_calendario:
         print('\n')
         sleep(5)
 
+        abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+        print('Abri o calendário Data Inicial')
+        sleep(5)
 
             
 
@@ -153,8 +152,6 @@ for mes in meses_calendario:
         if mes_inicial == mes_anterior_tratado:
             break
 
-
-        print(mes)
         sleep(5)
 
 
