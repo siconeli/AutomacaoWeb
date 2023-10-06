@@ -40,7 +40,6 @@ localiza_dia_1 = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD
 for td in localiza_dia_1:
     if td.text == '1':
         td.click()
-# Fim
 
 sleep(5)
 
@@ -67,52 +66,23 @@ sleep(2)
 
 localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
 
-# SOLUÇÃO: Pegar todos os dias de localiza_ultimo_dia e inserir em uma lista, ordenar ela e fazer um for para ver se tem o dia.
+for td in localiza_ultimo_dia:
+    if td.text == '30':
+        td.click()
 
-# encontrou_31 = False
-
-# for td in localiza_ultimo_dia:
-#     if td.text == '31':
-#         td.click()
-#         encontrou_31 = True
-#         break
-
-# if not encontrou_31:
-#     for td in localiza_ultimo_dia:
-#         if td.text == '30':
-#             td.click()
-#             break
-#         else:
-#             for td in localiza_ultimo_dia:
-#                 if td.text == '29':
-#                     td.click()
-#                     break
-#                 else:
-#                     for td in localiza_ultimo_dia:
-#                         if td.text == '28':
-#                             td.click()
-#                             break
-
-
-
-sleep(30)
-
-
-
-# Fim
-
+sleep(5)
 # Ir para a proxima pagina da tabela
-# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
 
-# sleep(5)
+sleep(5)
 
-# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
+valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
 
-# print(valor_irrf)
+print(valor_irrf)
 
-# # Voltar para o contexto padrão
-# driver.switch_to.default_content()
+# Voltar para o contexto padrão
+driver.switch_to.default_content()
 
-# sleep(20)
+sleep(5)
 
-# driver.quit()
+driver.quit()
