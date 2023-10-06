@@ -8,7 +8,7 @@ import datetime
 
 driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
-print('Realizei o carregamento do site')
+print('-> Carregamento de site realizado:')
 
 meses_conversao = {"1": "janeiro", "2": "fevereiro", "3": "março", "4": "abril", "5": "maio", "6": "junho", "7": "julho", "8": "agosto", "9": "setembro", "10": "outubro", "11": "novembro", "12": "dezembro"}
 
@@ -117,14 +117,34 @@ for mes in meses_calendario:
                 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
                 print(f'-> Igualando o mês final com o mês inicial')
 
-            localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+            localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td')
+            localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+            localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td')
 
-            ultimos_dias_final = []
+            lista_dias_linha_4 = []
+            lista_dias_linha_5 = []
+            lista_dias_linha_6 = []
 
-            for dia in localiza_ultimo_dia:
+            for dia in localiza_ultimo_dia_linha_4:
                 dia_texto = dia.text
                 dia_inteiro = int(dia_texto)
-                ultimos_dias_final.append(dia_inteiro)
+                lista_dias_linha_4.append(dia_inteiro)
+
+            for dia in localiza_ultimo_dia_linha_5:
+                dia_texto = dia.text
+                dia_inteiro = int(dia_texto)
+                lista_dias_linha_5.append(dia_inteiro)
+
+            for dia in localiza_ultimo_dia_linha_6:
+                dia_texto = dia.text
+                dia_inteiro = int(dia_texto)
+                lista_dias_linha_6.append(dia_inteiro)
+
+            
+            
+
+
+
 
             ultimo_dia = str(max(ultimos_dias_final))
             
@@ -132,6 +152,9 @@ for mes in meses_calendario:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+
+            ultimos_dias_final.clear()    
+            print(f'Limpou lista: {ultimos_dias_final}')
 
         print(f'-> Fim do mês: {mes}')
         print('\n')
