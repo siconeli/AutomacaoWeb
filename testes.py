@@ -41,24 +41,26 @@ for mes in meses_calendario:
         for dia in localiza_dia_1:
             if dia.text == '1':
                 dia.click()
-                print('Selecionei a data inicial!')
+                print(f'Selecionei o mes inicial! {mes}')
                 sleep(5)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
 
         mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
         
+        sleep(2)
+
         while mes_final != mes:
-        # proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
-        mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
-        mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
+            mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
+            mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
+        print(f'Selecionei o mes final igual ao mês inicial {mes}')
 
 
-    elif mes != mes_inicial:
-            print('entrou no segundo if')
-            sleep(5)
-            proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
-            print(f'segundo mes {mes}')
+    # elif mes != mes_inicial:
+    #         print('entrou no segundo if')
+    #         sleep(5)
+    #         proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
+    #         print(f'segundo mes {mes}')
 
 
 sleep(50)
@@ -90,6 +92,6 @@ sleep(50)
 #     print(f'mes: {mes}')
 #     cont += 1
 
-for mes in meses:
-    print(mes)
+# for mes in meses:
+#     print(mes)
 
