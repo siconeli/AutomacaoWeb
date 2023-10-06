@@ -89,16 +89,27 @@ for mes in meses_calendario:
         sleep(2)
 
     if mes != mes_inicial:
-        print(f'Mes: {mes}, Mes inicial: {mes_inicial}')
         while mes_inicial != mes:
             proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
             mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
 
+        # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
+        data_atual = datetime.datetime.now()
+        ano_atual = data_atual.year
+        mes_anterior = str(data_atual.month)
+        mes_anterior_extenso = meses_conversao.get(mes_anterior)
+        mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
+
+        if mes_inicial == mes_anterior_tratado:
+            break
+
+
         print(mes)
-        sleep(5)
+        sleep(1)
+
 
  
-
+sleep(150)
 
 
 
