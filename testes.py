@@ -63,11 +63,10 @@ for mes in meses_calendario:
             dia_texto = dia.text
             dia_inteiro = int(dia_texto)
             ultimos_dias.append(dia_inteiro)
-        
-        print(ultimos_dias)
 
+        ultimo_dia = max(ultimos_dias)
+        print(ultimo_dia)
         sleep(100)
-
 
 
     # elif mes != mes_inicial:
