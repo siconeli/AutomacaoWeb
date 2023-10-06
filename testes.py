@@ -49,7 +49,7 @@ for mes in meses_calendario:
             if dia.text == '1':
                 dia.click()
                 print(f'-> Dia e mês inicial selecionado: 01 de {mes}')
-                sleep(5)
+                sleep(2)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
         print('-> Abrindo calendário data Final')
@@ -83,20 +83,20 @@ for mes in meses_calendario:
 
         print(f'-> Fim do mês: {mes}')
         print('\n')
-        sleep(5)
+        sleep(2)
     
         print('-> Próximo mês!')
         print('\n')
         abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
         print('-> Abrindo calendário data inicial:')
-        sleep(5)
+        sleep(2)
 
     # Se o mês for diferente de janeiro: 
     if mes != mes_inicial:
         while mes_inicial != mes:
             proximo_mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_NMC"]').click()
             mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
-            sleep(5)
+            sleep(2)
 
             localiza_dia_1 = driver.find_elements(By.XPATH, '//table[@id="datDataInicial_DDD_C_mt"]/tbody/tr[2]/td')
             for dia in localiza_dia_1:
@@ -117,13 +117,17 @@ for mes in meses_calendario:
                 mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
                 print(f'-> Igualando o mês final com o mês inicial')
 
-            localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td')
-            localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
-            localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td')
+            localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td[@class="dxeCalendarDay_DevEx"]')
+            localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
+            localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
 
             lista_dias_linha_4 = []
             lista_dias_linha_5 = []
             lista_dias_linha_6 = []
+
+            print(lista_dias_linha_4)
+            print(lista_dias_linha_5)
+            print(lista_dias_linha_6)
 
             for dia in localiza_ultimo_dia_linha_4:
                 dia_texto = dia.text
@@ -140,21 +144,23 @@ for mes in meses_calendario:
                 dia_inteiro = int(dia_texto)
                 lista_dias_linha_6.append(dia_inteiro)
 
-            
-            
+            maior_linha_4 = max(lista_dias_linha_4)
+            maior_linha_5 = max(lista_dias_linha_5)
+            maior_linha_6 = max(lista_dias_linha_6)
 
+            maiores = []
+            print(maiores)
 
+            maiores.append(maior_linha_4)
+            maiores.append(maior_linha_5)
+            maiores.append(maior_linha_6)
 
-
-            ultimo_dia = str(max(ultimos_dias_final))
+            ultimo_dia = str(max(maiores))
             
             for dia in localiza_ultimo_dia:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
-
-            ultimos_dias_final.clear()    
-            print(f'Limpou lista: {ultimos_dias_final}')
 
         print(f'-> Fim do mês: {mes}')
         print('\n')
@@ -167,6 +173,7 @@ for mes in meses_calendario:
         # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
         data_atual = datetime.datetime.now()
         ano_atual = data_atual.year
+        mes_anterior = data_atual.month -1
         mes_anterior = str(data_atual.month)
         mes_anterior_extenso = meses_conversao.get(mes_anterior)
         mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
