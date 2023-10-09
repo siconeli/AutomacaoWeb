@@ -53,18 +53,34 @@ for mes in meses_calendario:
                 sleep(2)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
-        print('-> Abrindo calendário data final')
+        print('-> Abrindo calendário data Final')
 
         mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
-    
+        
         sleep(2)
 
-        while mes_final != mes_inicial:
-            proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
+        while mes_final != mes:
+            mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
-            print(f'-> Igualando o mês final com o mês inicial')
+        print(f'-> Igualando o mês final com o mês inicial')
 
-        maiores = []
+        # localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+
+        # ultimos_dias_inicial = []
+
+        # for dia in localiza_ultimo_dia:
+        #     dia_texto = dia.text
+        #     dia_inteiro = int(dia_texto)
+        #     ultimos_dias_inicial.append(dia_inteiro)
+
+        # ultimo_dia = str(max(ultimos_dias_inicial))
+        
+        # for dia in localiza_ultimo_dia:
+        #     if dia.text == ultimo_dia:
+        #         dia.click()   
+        #         print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+
+        maiores_inicial = []
 
         localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td[@class="dxeCalendarDay_DevEx"]')
 
@@ -76,7 +92,7 @@ for mes in meses_calendario:
                 dia_inteiro = int(dia_texto)
                 lista_dias_linha_4.append(dia_inteiro)
 
-            maiores.append(max(lista_dias_linha_4))
+            maiores_inicial.append(max(lista_dias_linha_4))
 
         localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
         
@@ -88,7 +104,7 @@ for mes in meses_calendario:
                 dia_inteiro = int(dia_texto)
                 lista_dias_linha_5.append(dia_inteiro)
 
-            maiores.append(max(lista_dias_linha_5))
+            maiores_inicial.append(max(lista_dias_linha_5))
 
         localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
 
@@ -100,9 +116,9 @@ for mes in meses_calendario:
                 dia_inteiro = int(dia_texto)
                 lista_dias_linha_6.append(dia_inteiro)
 
-            maiores.append(max(lista_dias_linha_6))
+            maiores_inicial.append(max(lista_dias_linha_6))
 
-        ultimo_dia = str(max(maiores))
+        ultimo_dia = str(max(maiores_inicial))
         
         for dia in localiza_ultimo_dia_linha_4:
             if dia.text == ultimo_dia:
@@ -121,10 +137,9 @@ for mes in meses_calendario:
                 dia.click()   
                 print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
                 sleep(5)
-        
+
         # Ir para a proxima pagina da tabela
         clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
-        print('-> Próxima página')
 
         sleep(2)
 
@@ -132,8 +147,8 @@ for mes in meses_calendario:
 
         valores_receita.append(valor_irrf)
 
-        print(f'-> Valor R${valor_irrf} salvo na lista')
-        
+        print(f'-> Valor R${valor_irrf} inserido na lista')
+    
         print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(2)
@@ -214,20 +229,22 @@ for mes in meses_calendario:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+                    sleep(5)
 
             for dia in localiza_ultimo_dia_linha_5:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+                    sleep(5)
 
             for dia in localiza_ultimo_dia_linha_6:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+                    sleep(5)
 
-            # Ir para a proxima pagina da tabela
+            # # Ir para a proxima pagina da tabela
             clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
-            print('-> Próxima página')
 
             sleep(2)
 
@@ -235,7 +252,7 @@ for mes in meses_calendario:
 
             valores_receita.append(valor_irrf)
 
-            print(f'-> Valor R${valor_irrf} salvo na lista')
+            print(f'-> Valor R${valor_irrf} inserido na lista')
 
         print(f'-> Fim do mês: {mes}')
         print('\n')
@@ -254,16 +271,21 @@ for mes in meses_calendario:
         mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
         if mes_inicial == mes_anterior_tratado:
-            print(f'-> O mês {mes_anterior_tratado} é 1 mês anterior ao mês atual, finalizando automação...')
-
-            print(f'-> Lista de valores IRRF mês a mês: {valor_irrf}')
+            print(f'O mês {mes_anterior_tratado} é 1 mês anterior ao mês atual, finalizando automação...')
+            print(f'-> Lista de valores IRRF mês a mês: {valores_receita}')
 
             driver.quit()
 
-
+        sleep(5)
     
 
 
+# # Ir para a proxima pagina da tabela
+# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+
+# sleep(2)
+
+# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
 
 
 
