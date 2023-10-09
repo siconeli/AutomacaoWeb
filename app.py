@@ -188,9 +188,6 @@ for mes in meses_calendario:
 sleep(150)
 
 
-
-
-
 # Ir para a proxima pagina da tabela
 clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
 
