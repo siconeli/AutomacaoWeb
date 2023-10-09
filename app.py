@@ -10,10 +10,9 @@ driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
 print('-> Carregamento de site realizado:')
 
-meses_conversao = {"1": "janeiro", "2": "fevereiro", "3": "março", "4": "abril", "5": "maio", "6": "junho", "7": "julho", "8": "agosto", "9": "setembro", "10": "outubro", "11": "novembro", "12": "dezembro"}
-
-
 meses_calendario = ["janeiro de 2023", "fevereiro de 2023", "março de 2023", "abril de 2023", "maio de 2023", "junho de 2023", "julho de 2023", "agosto de 2023", "setembro de 2023", "outubro de 2023", "novembro de 2023", "dezembro de 2023"]
+
+meses_conversao = {"1": "janeiro", "2": "fevereiro", "3": "março", "4": "abril", "5": "maio", "6": "junho", "7": "julho", "8": "agosto", "9": "setembro", "10": "outubro", "11": "novembro", "12": "dezembro"}
 
 sleep(5)
 
@@ -157,7 +156,17 @@ for mes in meses_calendario:
 
             ultimo_dia = str(max(maiores))
             
-            for dia in localiza_ultimo_dia:
+            for dia in localiza_ultimo_dia_linha_4:
+                if dia.text == ultimo_dia:
+                    dia.click()   
+                    print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+
+            for dia in localiza_ultimo_dia_linha_5:
+                if dia.text == ultimo_dia:
+                    dia.click()   
+                    print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+
+            for dia in localiza_ultimo_dia_linha_6:
                 if dia.text == ultimo_dia:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
@@ -174,12 +183,13 @@ for mes in meses_calendario:
         data_atual = datetime.datetime.now()
         ano_atual = data_atual.year
         mes_anterior = data_atual.month -1
-        mes_anterior = str(data_atual.month)
+        mes_anterior = str(mes_anterior)
         mes_anterior_extenso = meses_conversao.get(mes_anterior)
         mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
         if mes_inicial == mes_anterior_tratado:
-            break
+            print(f'1 mês antes do mês atual... Fechando.. {mes_anterior_tratado}')
+            driver.quit()
 
         sleep(5)
 
@@ -188,21 +198,21 @@ for mes in meses_calendario:
 sleep(150)
 
 
-# Ir para a proxima pagina da tabela
-clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+# # Ir para a proxima pagina da tabela
+# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
 
-sleep(5)
+# sleep(5)
 
-valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
+# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
 
-print(valor_irrf)
+# print(valor_irrf)
 
-# Voltar para o contexto padrão
-driver.switch_to.default_content()
+# # Voltar para o contexto padrão
+# driver.switch_to.default_content()
 
-sleep(5)
+# sleep(5)
 
-driver.quit()
+# driver.quit()
 
 
 
