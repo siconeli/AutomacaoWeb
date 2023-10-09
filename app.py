@@ -131,9 +131,6 @@ for mes in meses_calendario:
 
                 maiores.append(max(lista_dias_linha_4))
 
-            print(maiores)
-            sleep(50)
-
             localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
             
             if localiza_ultimo_dia_linha_5:
@@ -146,39 +143,21 @@ for mes in meses_calendario:
 
                 maiores.append(max(lista_dias_linha_5))
 
-            # localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
-            # if localiza_ultimo_dia_linha_6:
-                
-                
+            localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
 
-            
-            # lista_dias_linha_6 = []
+            if localiza_ultimo_dia_linha_6:
+                lista_dias_linha_6 = []
 
+                for dia in localiza_ultimo_dia_linha_6:
+                    dia_texto = dia.text
+                    dia_inteiro = int(dia_texto)
+                    lista_dias_linha_6.append(dia_inteiro)
 
-     
+                maiores.append(max(lista_dias_linha_6))
 
-            # for dia in localiza_ultimo_dia_linha_6:
-            #     if dia:
-            #         dia_texto = dia.text
-            #         dia_inteiro = int(dia_texto)
-            #         lista_dias_linha_6.append(dia_inteiro)
-            #     else:
-            #         lista_dias_linha_6.append(0)
-
-            
+            ultimo_dia = str(max(maiores))
 
 
-            # if len(lista_dias_linha_6) >= 0: 
-            #     maior_linha_6 = max(lista_dias_linha_6)
-
-            # if maior_linha_6:
-            #     maiores.append(maior_linha_6)
-
-
-
-
-
-            # ultimo_dia = str(max(maiores))
             
             # for dia in localiza_ultimo_dia:
             #     if dia.text == ultimo_dia:
