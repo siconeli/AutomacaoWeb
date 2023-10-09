@@ -156,38 +156,36 @@ for mes in meses_calendario:
                 maiores.append(max(lista_dias_linha_6))
 
             ultimo_dia = str(max(maiores))
-
-
             
-            # for dia in localiza_ultimo_dia:
-            #     if dia.text == ultimo_dia:
-            #         dia.click()   
-            #         print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+            for dia in localiza_ultimo_dia:
+                if dia.text == ultimo_dia:
+                    dia.click()   
+                    print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
 
-        # print(f'-> Fim do mês: {mes}')
-        # print('\n')
-        # sleep(5)
+        print(f'-> Fim do mês: {mes}')
+        print('\n')
+        sleep(5)
 
-        # abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
-        # print('-> Abrindo calendário data')
-        # sleep(5)
+        abri_calendario_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_B-1"]/table/tbody/tr/td').click()
+        print('-> Abrindo calendário data')
+        sleep(5)
 
-        # # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monte a string para ser utilizada na condição
-        # data_atual = datetime.datetime.now()
-        # ano_atual = data_atual.year
-        # mes_anterior = data_atual.month -1
-        # mes_anterior = str(data_atual.month)
-        # mes_anterior_extenso = meses_conversao.get(mes_anterior)
-        # mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
+        # Pega a data atual, desconta um mês para pegar o mês anterior ao atual, converte o número do mês para o mês por extenso, e monta a string para ser utilizada na condição
+        data_atual = datetime.datetime.now()
+        ano_atual = data_atual.year
+        mes_anterior = data_atual.month -1
+        mes_anterior = str(data_atual.month)
+        mes_anterior_extenso = meses_conversao.get(mes_anterior)
+        mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
-        # if mes_inicial == mes_anterior_tratado:
-        #     break
+        if mes_inicial == mes_anterior_tratado:
+            break
 
-        # sleep(5)
+        sleep(5)
 
 
- 
-# sleep(150)
+sleep(2)
+sleep(150)
 
 
 
