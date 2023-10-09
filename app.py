@@ -148,6 +148,7 @@ for mes in meses_calendario:
         valores_receita.append(valor_irrf)
 
         print(f'-> Valor R${valor_irrf} inserido na lista')
+        sleep(2)
     
         print(f'-> Fim do mês: {mes}')
         print('\n')
@@ -244,7 +245,7 @@ for mes in meses_calendario:
                     sleep(5)
 
             # # Ir para a proxima pagina da tabela
-            clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+            # clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
 
             sleep(2)
 
