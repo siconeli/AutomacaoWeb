@@ -36,6 +36,8 @@ print('-> Abrindo calendário data inicial:')
 
 sleep(2)
 
+valores_receita = []
+
 mes_inicial = driver.find_element(By.XPATH, '//td[@id="datDataInicial_DDD_C_TC"]/span').text.lower().strip()
 
 print(f'-> Início do mês {mes_inicial}')
@@ -51,35 +53,87 @@ for mes in meses_calendario:
                 sleep(2)
 
         abri_calendario_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_B-1"]/table/tbody/tr/td').click()
-        print('-> Abrindo calendário data Final')
+        print('-> Abrindo calendário data final')
 
         mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text.lower().strip()
-        
+    
         sleep(2)
 
-        while mes_final != mes:
-            mes_anterior_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_PMC"]').click()
+        while mes_final != mes_inicial:
+            proximo_mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_NMC"]').click()
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
-        print(f'-> Igualando o mês final com o mês inicial')
+            print(f'-> Igualando o mês final com o mês inicial')
 
-        localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
+        maiores = []
 
-        ultimos_dias_inicial = []
+        localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td[@class="dxeCalendarDay_DevEx"]')
 
-        for dia in localiza_ultimo_dia:
-            dia_texto = dia.text
-            dia_inteiro = int(dia_texto)
-            ultimos_dias_inicial.append(dia_inteiro)
+        if localiza_ultimo_dia_linha_4:
+            lista_dias_linha_4 = []
 
-        ultimo_dia = str(max(ultimos_dias_inicial))
+            for dia in localiza_ultimo_dia_linha_4:
+                dia_texto = dia.text
+                dia_inteiro = int(dia_texto)
+                lista_dias_linha_4.append(dia_inteiro)
+
+            maiores.append(max(lista_dias_linha_4))
+
+        localiza_ultimo_dia_linha_5 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td[@class="dxeCalendarDay_DevEx"]')
         
-        for dia in localiza_ultimo_dia:
+        if localiza_ultimo_dia_linha_5:
+            lista_dias_linha_5 = []
+
+            for dia in localiza_ultimo_dia_linha_5:
+                dia_texto = dia.text
+                dia_inteiro = int(dia_texto)
+                lista_dias_linha_5.append(dia_inteiro)
+
+            maiores.append(max(lista_dias_linha_5))
+
+        localiza_ultimo_dia_linha_6 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[7]/td[@class="dxeCalendarDay_DevEx"]')
+
+        if localiza_ultimo_dia_linha_6:
+            lista_dias_linha_6 = []
+
+            for dia in localiza_ultimo_dia_linha_6:
+                dia_texto = dia.text
+                dia_inteiro = int(dia_texto)
+                lista_dias_linha_6.append(dia_inteiro)
+
+            maiores.append(max(lista_dias_linha_6))
+
+        ultimo_dia = str(max(maiores))
+        
+        for dia in localiza_ultimo_dia_linha_4:
             if dia.text == ultimo_dia:
                 dia.click()   
                 print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
-        
-        # Inserir o código para pegar os dados da tabela e inserir no excel...
+                sleep(5)
 
+        for dia in localiza_ultimo_dia_linha_5:
+            if dia.text == ultimo_dia:
+                dia.click()   
+                print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+                sleep(5)
+
+        for dia in localiza_ultimo_dia_linha_6:
+            if dia.text == ultimo_dia:
+                dia.click()   
+                print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
+                sleep(5)
+        
+        # Ir para a proxima pagina da tabela
+        clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+        print('-> Próxima página')
+
+        sleep(2)
+
+        valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
+
+        valores_receita.append(valor_irrf)
+
+        print(f'-> Valor R${valor_irrf} salvo na lista')
+        
         print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(2)
@@ -171,6 +225,18 @@ for mes in meses_calendario:
                     dia.click()   
                     print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
 
+            # Ir para a proxima pagina da tabela
+            clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
+            print('-> Próxima página')
+
+            sleep(2)
+
+            valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
+
+            valores_receita.append(valor_irrf)
+
+            print(f'-> Valor R${valor_irrf} salvo na lista')
+
         print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(5)
@@ -188,31 +254,18 @@ for mes in meses_calendario:
         mes_anterior_tratado = f'{mes_anterior_extenso} de {ano_atual}'
 
         if mes_inicial == mes_anterior_tratado:
-            print(f'1 mês antes do mês atual... Fechando.. {mes_anterior_tratado}')
+            print(f'-> O mês {mes_anterior_tratado} é 1 mês anterior ao mês atual, finalizando automação...')
+
+            print(f'-> Lista de valores IRRF mês a mês: {valor_irrf}')
+
             driver.quit()
 
-        sleep(5)
+
+    
 
 
- 
-sleep(150)
 
 
-# # Ir para a proxima pagina da tabela
-# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
-
-# sleep(5)
-
-# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
-
-# print(valor_irrf)
-
-# # Voltar para o contexto padrão
-# driver.switch_to.default_content()
-
-# sleep(5)
-
-# driver.quit()
 
 
 
