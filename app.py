@@ -64,22 +64,6 @@ for mes in meses_calendario:
             mes_final = driver.find_element(By.XPATH, '//td[@id="datDataFinal_DDD_C_TC"]/span').text
         print(f'-> Igualando o mês final com o mês inicial')
 
-        # localiza_ultimo_dia = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[6]/td')
-
-        # ultimos_dias_inicial = []
-
-        # for dia in localiza_ultimo_dia:
-        #     dia_texto = dia.text
-        #     dia_inteiro = int(dia_texto)
-        #     ultimos_dias_inicial.append(dia_inteiro)
-
-        # ultimo_dia = str(max(ultimos_dias_inicial))
-        
-        # for dia in localiza_ultimo_dia:
-        #     if dia.text == ultimo_dia:
-        #         dia.click()   
-        #         print(f'-> Selecionando o último dia do mês: {ultimo_dia}')
-
         maiores_inicial = []
 
         localiza_ultimo_dia_linha_4 = driver.find_elements(By.XPATH, '//table[@id="datDataFinal_DDD_C_mt"]/tbody/tr[5]/td[@class="dxeCalendarDay_DevEx"]')
@@ -149,6 +133,8 @@ for mes in meses_calendario:
 
         print(f'-> Valor R${valor_irrf} inserido na lista')
         sleep(2)
+
+        # Inserir o aqui o código para inserir os valores no excel
     
         print(f'-> Fim do mês: {mes}')
         print('\n')
@@ -255,6 +241,8 @@ for mes in meses_calendario:
 
             print(f'-> Valor R${valor_irrf} inserido na lista')
 
+            # Inserir o aqui o código para inserir os valores no excel
+
         print(f'-> Fim do mês: {mes}')
         print('\n')
         sleep(5)
@@ -277,16 +265,9 @@ for mes in meses_calendario:
 
             driver.quit()
 
-        sleep(5)
     
 
 
-# # Ir para a proxima pagina da tabela
-# clica_proxima_pagina = driver.find_element(By.XPATH, '//table[@class="dxpControl"]/tbody/tr/td/table/tbody/tr/td[@class="dxpButton"]').click()
-
-# sleep(2)
-
-# valor_irrf = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[8]').text
 
 
 
