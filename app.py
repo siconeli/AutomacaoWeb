@@ -1,14 +1,18 @@
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.select import Select
 import datetime
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from time import sleep
 import datetime
+import openpyxl
+
 
 driver = webdriver.Chrome()
 driver.get('http://45.188.183.155:8079/transparencia/')
 print('-> Carregamento de site realizado:')
+
+driver.set_window_size(1600, 900)
 
 meses_calendario = ["janeiro de 2023", "fevereiro de 2023", "março de 2023", "abril de 2023", "maio de 2023", "junho de 2023", "julho de 2023", "agosto de 2023", "setembro de 2023", "outubro de 2023", "novembro de 2023", "dezembro de 2023"]
 
@@ -262,8 +266,41 @@ for mes in meses_calendario:
         if mes_inicial == mes_anterior_tratado:
             print(f'O mês {mes_anterior_tratado} é 1 mês anterior ao mês atual, finalizando automação...')
             print(f'-> Lista de valores IRRF mês a mês: {valores_receita}')
+            break
+        
+sleep(5)
 
-            driver.quit()
+nome_receita = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[2]').text
+
+workbook = openpyxl.load_workbook('irrf.xlsx')
+
+try:
+    pagina_irrf = workbook[nome_receita]
+
+    pagina_irrf['A1'].value = "Mês"
+    pagina_irrf['B1'].value = "Valor"
+
+    for index, linha in enumerate(pagina_irrf.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+        for celula in linha:
+            celula.value = valores_receita[index]
+
+    workbook.save('irrf.xlsx')
+    driver.close()
+
+except Exception as error:
+    workbook.create_sheet(nome_receita)
+
+    pagina_irrf = workbook[nome_receita]
+
+    pagina_irrf['A1'].value = "Mês"
+    pagina_irrf['B1'].value = "Valor"
+
+    for index, linha in enumerate(pagina_irrf.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+        for celula in linha:
+            celula.value = valores_receita[index]
+
+    workbook.save('irrf.xlsx')
+    driver.close()
 
     
 
