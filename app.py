@@ -270,17 +270,18 @@ for mes in meses_calendario:
         
 sleep(5)
 
-nome_receita = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[2]').text
+# nome_receita = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[2]').text
+nome_aba = '2023'
 
 workbook = openpyxl.load_workbook('irrf.xlsx')
 
 try:
-    pagina_irrf = workbook[nome_receita]
+    aba_2023 = workbook[nome_aba]
 
-    pagina_irrf['A1'].value = "Mês"
-    pagina_irrf['B1'].value = "Valor"
+    aba_2023['A1'].value = "Período"
+    aba_2023['B1'].value = "Valor Receita"
 
-    for index, linha in enumerate(pagina_irrf.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
         for celula in linha:
             celula.value = valores_receita[index]
 
@@ -288,14 +289,14 @@ try:
     driver.close()
 
 except Exception as error:
-    workbook.create_sheet(nome_receita)
+    workbook.create_sheet(nome_aba)
 
-    pagina_irrf = workbook[nome_receita]
+    aba_2023 = workbook[nome_aba]
 
-    pagina_irrf['A1'].value = "Mês"
-    pagina_irrf['B1'].value = "Valor"
+    aba_2023['A1'].value = "Mês"
+    aba_2023['B1'].value = "Valor"
 
-    for index, linha in enumerate(pagina_irrf.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
         for celula in linha:
             celula.value = valores_receita[index]
 
