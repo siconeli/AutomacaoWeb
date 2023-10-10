@@ -270,7 +270,8 @@ for mes in meses_calendario:
         
 sleep(5)
 
-# nome_receita = driver.find_element(By.XPATH, '//tr[@id="gridReceitas_DXDataRow36"]/td[2]').text
+print('-> Inserindo arquivos na planilha Excel...')
+
 nome_aba = '2023'
 
 workbook = openpyxl.load_workbook('irrf.xlsx')
