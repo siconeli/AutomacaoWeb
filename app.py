@@ -281,7 +281,11 @@ try:
     aba_2023['A1'].value = "Período"
     aba_2023['B1'].value = "Valor Receita"
 
-    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita)+1, min_col=1, max_col=1)):
+        for celula in linha:
+            celula.value = meses_calendario[index]
+
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita)+1, min_col=2, max_col=2)):
         for celula in linha:
             celula.value = valores_receita[index]
 
@@ -293,10 +297,14 @@ except Exception as error:
 
     aba_2023 = workbook[nome_aba]
 
-    aba_2023['A1'].value = "Mês"
-    aba_2023['B1'].value = "Valor"
+    aba_2023['A1'].value = "Período"
+    aba_2023['B1'].value = "Valor Receita"
 
-    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita), min_col=2, max_col=2)):
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita)+1, min_col=1, max_col=1)):
+        for celula in linha:
+            celula.value = meses_calendario[index]
+
+    for index, linha in enumerate(aba_2023.iter_rows(min_row=2, max_row=len(valores_receita)+1, min_col=2, max_col=2)):
         for celula in linha:
             celula.value = valores_receita[index]
 
